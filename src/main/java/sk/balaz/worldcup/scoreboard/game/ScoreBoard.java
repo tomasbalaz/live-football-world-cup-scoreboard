@@ -35,4 +35,20 @@ public class ScoreBoard {
             match.setActive(false);
         }
     }
+
+    public void updateMatch(Team homeTeam, Team awayTeam) {
+        Match match = new Match(homeTeam, awayTeam);
+        Optional<Match> optionalFoundMatch = matches.stream()
+                .filter(m -> m.getHomeTeam().getName().equals(match.getHomeTeam().getName()))
+                .filter(m -> m.getAwayTeam().getName().equals(match.getAwayTeam().getName()))
+                .findFirst();
+        if (optionalFoundMatch.isPresent()) {
+            Match foundMatch = optionalFoundMatch.get();
+            Team ht = foundMatch.getHomeTeam();
+            Team at = foundMatch.getAwayTeam();
+
+            ht.setScore(match.getHomeTeam().getScore());
+            at.setScore(match.getAwayTeam().getScore());
+        }
+     }
 }

@@ -77,10 +77,17 @@ public class WorldCupScoreBoardTest {
         //when
         underTest.insertMatch(homeTeam, awayTeam);
 
+        assertEquals(0, homeTeam.getScore());
+        assertEquals(0, awayTeam.getScore());
+
         homeTeam.setScore(0);
         awayTeam.setScore(5);
 
         underTest.updateMatch(homeTeam, awayTeam);
+
+        //then
+        assertEquals(0, homeTeam.getScore());
+        assertEquals(5, awayTeam.getScore());
 
     }
 }
