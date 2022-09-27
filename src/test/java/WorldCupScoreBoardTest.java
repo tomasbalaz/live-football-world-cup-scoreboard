@@ -66,4 +66,21 @@ public class WorldCupScoreBoardTest {
                 .anyMatch(match -> !match.isActive()));
 
     }
+
+    @Test
+    void itShouldUpdateMatch() {
+
+        //given
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam =  new Team("Canada");
+
+        //when
+        underTest.insertMatch(homeTeam, awayTeam);
+
+        homeTeam.setScore(0);
+        awayTeam.setScore(5);
+
+        underTest.updateMatch(homeTeam, awayTeam);
+
+    }
 }
