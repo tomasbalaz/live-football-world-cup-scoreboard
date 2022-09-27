@@ -15,11 +15,11 @@ public class WorldCupScoreBoardTest {
     @Test
     void itShouldInsertMatch() {
         //given
-        Team homeTeam = new Team();
-        Team awayTeam =  new Team();
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam =  new Team("Canada");
 
         //when
-        underTest.insertMatch(Team homeTeam, Team awayTeam);
+        underTest.insertMatch(homeTeam, awayTeam);
 
         //then
     }
