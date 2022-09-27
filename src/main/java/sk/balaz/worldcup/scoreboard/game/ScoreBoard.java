@@ -9,6 +9,13 @@ public class ScoreBoard {
 
 
     public void insertMatch(Team homeTeam, Team awayTeam) {
+        Match match = new Match(homeTeam, awayTeam);
+        if(matches.contains(match)) {
+            throw new IllegalArgumentException(
+                    "It is not possible to have two same matches in same time "
+            );
+        }
+
         matches.add(new Match(homeTeam, awayTeam));
     }
 
