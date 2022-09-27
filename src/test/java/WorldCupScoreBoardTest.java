@@ -3,6 +3,9 @@ import org.junit.jupiter.api.Test;
 import sk.balaz.worldcup.scoreboard.game.ScoreBoard;
 import sk.balaz.worldcup.scoreboard.game.Team;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class WorldCupScoreBoardTest {
 
     private ScoreBoard underTest;
@@ -22,5 +25,12 @@ public class WorldCupScoreBoardTest {
         underTest.insertMatch(homeTeam, awayTeam);
 
         //then
+        assertFalse(underTest.getMatches().isEmpty());
+        assertTrue(underTest.getMatches().stream()
+                .anyMatch(match -> "Mexico".equals(match.getHomeTeam().getName()))
+        );
+        assertTrue(underTest.getMatches().stream()
+                .anyMatch(match -> "Canada".equals(match.getAwayTeam().getName()))
+        );
     }
 }
