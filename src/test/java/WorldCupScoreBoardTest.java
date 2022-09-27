@@ -48,4 +48,9 @@ public class WorldCupScoreBoardTest {
         //then
         assertThrows(IllegalArgumentException.class, () -> underTest.insertMatch(homeTeam2, awayTeam2));
     }
+
+    @Test
+    void itShouldRemoveMatch() {
+        underTest.removeMatch();
+    }
 }
