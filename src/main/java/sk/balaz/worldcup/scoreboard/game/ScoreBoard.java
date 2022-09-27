@@ -2,6 +2,7 @@ package sk.balaz.worldcup.scoreboard.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ScoreBoard {
 
@@ -21,5 +22,17 @@ public class ScoreBoard {
 
     public List<Match> getMatches() {
         return matches;
+    }
+
+    public void removeMatch() {
+        Optional<Match> first = matches.stream()
+                .filter(Match::isActive)
+                .findFirst();
+
+        if(first.isPresent()) {
+            Match match = first.get();
+            matches.remove(match);
+            match.setActive(false);
+        }
     }
 }

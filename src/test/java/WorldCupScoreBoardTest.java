@@ -51,6 +51,19 @@ public class WorldCupScoreBoardTest {
 
     @Test
     void itShouldRemoveMatch() {
+
+        //given
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam =  new Team("Canada");
+
+        //when
+        underTest.insertMatch(homeTeam, awayTeam);
         underTest.removeMatch();
+
+        //then
+        assertTrue(underTest.getMatches().isEmpty());
+        assertFalse(underTest.getMatches().stream()
+                .anyMatch(match -> !match.isActive()));
+
     }
 }

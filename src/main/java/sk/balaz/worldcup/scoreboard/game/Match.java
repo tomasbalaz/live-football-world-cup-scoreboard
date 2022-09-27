@@ -8,9 +8,12 @@ public class Match {
 
     private final Team awayTeam;
 
+    private boolean isActive;
+
     public Match(Team homeTeam, Team awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.isActive = true;
     }
 
     public Team getHomeTeam() {
@@ -19,6 +22,14 @@ public class Match {
 
     public Team getAwayTeam() {
         return awayTeam;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     @Override
