@@ -50,7 +50,23 @@ public class WorldCupWorldCupScoreBoardTest {
         underTest.insertMatch(homeTeam, awayTeam);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> underTest.insertMatch(homeTeam2, awayTeam2));
+        assertThrows(ScoreBoardException.class, () -> underTest.insertMatch(homeTeam2, awayTeam2));
+    }
+
+    @Test
+    void itShouldNotInsertMatchWhenActiveMatchExist() {
+
+        //given
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam =  new Team("Canada");
+
+        Team homeTeam2 = new Team("Spain");
+        Team awayTeam2 =  new Team("Brazil");
+
+        //when
+        underTest.insertMatch(homeTeam, awayTeam);
+        //then
+        assertThrows(ScoreBoardException.class, () -> underTest.insertMatch(homeTeam2, awayTeam2));
     }
 
     @Test
@@ -65,10 +81,8 @@ public class WorldCupWorldCupScoreBoardTest {
         underTest.removeMatch();
 
         //then
-        assertTrue(underTest.getMatches().isEmpty());
-        assertFalse(underTest.getMatches().stream()
-                .anyMatch(footballMatch -> !footballMatch.isActive()));
-
+        assertFalse(underTest.getMatches().isEmpty());
+        assertFalse(underTest.getMatches().get(0).isActive());
     }
 
     @Test
@@ -103,6 +117,7 @@ public class WorldCupWorldCupScoreBoardTest {
 
         //when
         underTest.insertMatch(homeTeam, awayTeam);
+        underTest.updateMatch(homeTeam, awayTeam);
         underTest.removeMatch();
 
         //then
@@ -144,10 +159,15 @@ public class WorldCupWorldCupScoreBoardTest {
         away5.setScore(1);
 
         underTest.insertMatch(home1, away1);
+        underTest.removeMatch();
         underTest.insertMatch(home2, away2);
+        underTest.removeMatch();
         underTest.insertMatch(home3, away3);
+        underTest.removeMatch();
         underTest.insertMatch(home4, away4);
+        underTest.removeMatch();
         underTest.insertMatch(home5, away5);
+        underTest.removeMatch();
 
         //when
         List<Match> orderedFootballMatches = underTest.getOrderedMatches();

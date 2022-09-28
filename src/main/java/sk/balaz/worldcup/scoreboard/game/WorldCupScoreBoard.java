@@ -19,8 +19,16 @@ public class WorldCupScoreBoard implements ScoreBoard {
     public void insertMatch(Team homeTeam, Team awayTeam) {
         FootballMatch footballMatch = new FootballMatch(homeTeam, awayTeam);
         if(footballMatches.contains(footballMatch)) {
-            throw new IllegalArgumentException(
+            throw new ScoreBoardException(
                     "It is not possible to have two same matches in same time."
+            );
+        }
+        Optional<Match> first = footballMatches.stream()
+                .filter(Match::isActive)
+                .findFirst();
+        if (first.isPresent()) {
+            throw new ScoreBoardException(
+                    "It is not possible to have two active matches in same time."
             );
         }
 
@@ -40,7 +48,6 @@ public class WorldCupScoreBoard implements ScoreBoard {
 
         if(first.isPresent()) {
             Match footballMatch = first.get();
-            footballMatches.remove(footballMatch);
             footballMatch.setActive(false);
         }
     }
@@ -51,6 +58,7 @@ public class WorldCupScoreBoard implements ScoreBoard {
         Optional<Match> optionalFoundMatch = footballMatches.stream()
                 .filter(m -> m.getHomeTeam().getName().equals(footballMatch.getHomeTeam().getName()))
                 .filter(m -> m.getAwayTeam().getName().equals(footballMatch.getAwayTeam().getName()))
+                .filter(Match::isActive)
                 .findFirst();
         if (optionalFoundMatch.isEmpty()) {
             throw new ScoreBoardException(
