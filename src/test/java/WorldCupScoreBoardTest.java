@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sk.balaz.worldcup.scoreboard.exception.ScoreBoardException;
 import sk.balaz.worldcup.scoreboard.game.ScoreBoard;
 import sk.balaz.worldcup.scoreboard.game.Team;
 
@@ -89,5 +90,19 @@ public class WorldCupScoreBoardTest {
         assertEquals(0, homeTeam.getScore());
         assertEquals(5, awayTeam.getScore());
 
+    }
+
+    @Test
+    void itShouldNotUpdateMatchWhenMatchIsDisabled() {
+        //given
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam =  new Team("Canada");
+
+        //when
+        underTest.insertMatch(homeTeam, awayTeam);
+        underTest.removeMatch();
+
+        //then
+        assertThrows(ScoreBoardException.class, () -> underTest.updateMatch(homeTeam, awayTeam));
     }
 }

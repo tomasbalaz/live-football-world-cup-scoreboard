@@ -1,5 +1,7 @@
 package sk.balaz.worldcup.scoreboard.game;
 
+import sk.balaz.worldcup.scoreboard.exception.ScoreBoardException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +15,7 @@ public class ScoreBoard {
         Match match = new Match(homeTeam, awayTeam);
         if(matches.contains(match)) {
             throw new IllegalArgumentException(
-                    "It is not possible to have two same matches in same time "
+                    "It is not possible to have two same matches in same time."
             );
         }
 
@@ -50,5 +52,7 @@ public class ScoreBoard {
             ht.setScore(match.getHomeTeam().getScore());
             at.setScore(match.getAwayTeam().getScore());
         }
+        throw new ScoreBoardException(
+                "It is not possible to update match which is not active.");
      }
 }
