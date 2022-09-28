@@ -2,14 +2,17 @@ package sk.balaz.worldcup.scoreboard.game;
 
 import sk.balaz.worldcup.scoreboard.exception.ScoreBoardException;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 public class WorldCupScoreBoard implements ScoreBoard {
 
-    private final List<Match> footballMatches = new ArrayList<>();
+    private final List<Match> footballMatches;
+
+    public WorldCupScoreBoard(List<Match> footballMatches) {
+        this.footballMatches = footballMatches;
+    }
 
 
     @Override
