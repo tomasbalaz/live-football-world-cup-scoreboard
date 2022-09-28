@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sk.balaz.worldcup.scoreboard.exception.ScoreBoardException;
+import sk.balaz.worldcup.scoreboard.game.FootballMatch;
 import sk.balaz.worldcup.scoreboard.game.Match;
 import sk.balaz.worldcup.scoreboard.game.ScoreBoard;
 import sk.balaz.worldcup.scoreboard.game.Team;
@@ -30,10 +31,10 @@ public class WorldCupScoreBoardTest {
         //then
         assertFalse(underTest.getMatches().isEmpty());
         assertTrue(underTest.getMatches().stream()
-                .anyMatch(match -> "Mexico".equals(match.getHomeTeam().getName()))
+                .anyMatch(footballMatch -> "Mexico".equals(footballMatch.getHomeTeam().getName()))
         );
         assertTrue(underTest.getMatches().stream()
-                .anyMatch(match -> "Canada".equals(match.getAwayTeam().getName()))
+                .anyMatch(footballMatch -> "Canada".equals(footballMatch.getAwayTeam().getName()))
         );
     }
 
@@ -67,7 +68,7 @@ public class WorldCupScoreBoardTest {
         //then
         assertTrue(underTest.getMatches().isEmpty());
         assertFalse(underTest.getMatches().stream()
-                .anyMatch(match -> !match.isActive()));
+                .anyMatch(footballMatch -> !footballMatch.isActive()));
 
     }
 
@@ -150,20 +151,20 @@ public class WorldCupScoreBoardTest {
         underTest.insertMatch(home5, away5);
 
         //when
-        List<Match> orderedMatches = underTest.getOrderedMatches();
+        List<Match> orderedFootballMatches = underTest.getOrderedMatches();
 
         //then
-        assertFalse(orderedMatches.isEmpty());
+        assertFalse(orderedFootballMatches.isEmpty());
         //1. Uruguay 6 - Italy 6
-        assertEquals(new Match(home4, away4), orderedMatches.get(0));
+        assertEquals(new FootballMatch(home4, away4), orderedFootballMatches.get(0));
         //2. Spain 10 - Brazil 2
-        assertEquals(new Match(home2, away2), orderedMatches.get(1));
+        assertEquals(new FootballMatch(home2, away2), orderedFootballMatches.get(1));
         //3. Mexico 0 - Canada 5
-        assertEquals(new Match(home1, away1), orderedMatches.get(2));
+        assertEquals(new FootballMatch(home1, away1), orderedFootballMatches.get(2));
         //4. Argentina 3 - Australia 1
-        assertEquals(new Match(home5, away5), orderedMatches.get(3));
+        assertEquals(new FootballMatch(home5, away5), orderedFootballMatches.get(3));
         //5. Germany 2 - France 2
-        assertEquals(new Match(home3, away3), orderedMatches.get(4));
+        assertEquals(new FootballMatch(home3, away3), orderedFootballMatches.get(4));
 
     }
 }
