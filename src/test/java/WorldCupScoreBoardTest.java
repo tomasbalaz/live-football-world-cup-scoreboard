@@ -1,8 +1,11 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sk.balaz.worldcup.scoreboard.exception.ScoreBoardException;
+import sk.balaz.worldcup.scoreboard.game.Match;
 import sk.balaz.worldcup.scoreboard.game.ScoreBoard;
 import sk.balaz.worldcup.scoreboard.game.Team;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -140,9 +143,27 @@ public class WorldCupScoreBoardTest {
         home5.setScore(3);
         away5.setScore(1);
 
+        underTest.insertMatch(home1, away1);
+        underTest.insertMatch(home2, away2);
+        underTest.insertMatch(home3, away3);
+        underTest.insertMatch(home4, away4);
+        underTest.insertMatch(home5, away5);
+
         //when
-        underTest.getOrderedMatches();
+        List<Match> orderedMatches = underTest.getOrderedMatches();
 
         //then
+        assertFalse(orderedMatches.isEmpty());
+        //1. Uruguay 6 - Italy 6
+        assertEquals(new Match(home4, away4), orderedMatches.get(0));
+        //2. Spain 10 - Brazil 2
+        assertEquals(new Match(home2, away2), orderedMatches.get(1));
+        //3. Mexico 0 - Canada 5
+        assertEquals(new Match(home1, away1), orderedMatches.get(2));
+        //4. Argentina 3 - Australia 1
+        assertEquals(new Match(home5, away5), orderedMatches.get(3));
+        //5. Germany 2 - France 2
+        assertEquals(new Match(home3, away3), orderedMatches.get(4));
+
     }
 }

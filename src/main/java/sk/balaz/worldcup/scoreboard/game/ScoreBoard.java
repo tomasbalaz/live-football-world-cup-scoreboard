@@ -3,6 +3,7 @@ package sk.balaz.worldcup.scoreboard.game;
 import sk.balaz.worldcup.scoreboard.exception.ScoreBoardException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,4 +56,14 @@ public class ScoreBoard {
         throw new ScoreBoardException(
                 "It is not possible to update match which is not active.");
      }
+
+    public List<Match> getOrderedMatches() {
+        matches.sort(
+                Comparator.comparing(Match::getScore)
+                        .thenComparing(Match::getStartTime)
+                        .reversed()
+        );
+
+        return matches;
+    }
 }
