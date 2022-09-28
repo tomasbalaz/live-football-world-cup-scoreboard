@@ -105,4 +105,44 @@ public class WorldCupScoreBoardTest {
         //then
         assertThrows(ScoreBoardException.class, () -> underTest.updateMatch(homeTeam, awayTeam));
     }
+
+    @Test
+    void itShouldReturnOrderedMatches() {
+
+        //given
+        Team home1 = new Team("Mexico");
+        Team away1 = new Team("Canada");
+
+        home1.setScore(0);
+        away1.setScore(5);
+
+        Team home2 = new Team("Spain");
+        Team away2 = new Team("Brazil");
+
+        home2.setScore(10);
+        away2.setScore(2);
+
+        Team home3 = new Team("Germany");
+        Team away3 = new Team("France");
+
+        home3.setScore(2);
+        away3.setScore(2);
+
+        Team home4 = new Team("Uruguay");
+        Team away4 = new Team("Italy");
+
+        home4.setScore(6);
+        away4.setScore(6);
+
+        Team home5 = new Team("Argentina");
+        Team away5 = new Team("Australia");
+
+        home5.setScore(3);
+        away5.setScore(1);
+
+        //when
+        underTest.getOrderedMatches();
+
+        //then
+    }
 }
