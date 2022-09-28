@@ -45,16 +45,16 @@ public class ScoreBoard {
                 .filter(m -> m.getHomeTeam().getName().equals(match.getHomeTeam().getName()))
                 .filter(m -> m.getAwayTeam().getName().equals(match.getAwayTeam().getName()))
                 .findFirst();
-        if (optionalFoundMatch.isPresent()) {
-            Match foundMatch = optionalFoundMatch.get();
-            Team ht = foundMatch.getHomeTeam();
-            Team at = foundMatch.getAwayTeam();
-
-            ht.setScore(match.getHomeTeam().getScore());
-            at.setScore(match.getAwayTeam().getScore());
+        if (optionalFoundMatch.isEmpty()) {
+            throw new ScoreBoardException(
+                    "It is not possible to update match which is not active.");
         }
-        throw new ScoreBoardException(
-                "It is not possible to update match which is not active.");
+        Match foundMatch = optionalFoundMatch.get();
+        Team ht = foundMatch.getHomeTeam();
+        Team at = foundMatch.getAwayTeam();
+
+        ht.setScore(match.getHomeTeam().getScore());
+        at.setScore(match.getAwayTeam().getScore());
      }
 
     public List<Match> getOrderedMatches() {
