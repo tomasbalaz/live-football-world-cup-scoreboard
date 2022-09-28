@@ -1,22 +1,19 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sk.balaz.worldcup.scoreboard.exception.ScoreBoardException;
-import sk.balaz.worldcup.scoreboard.game.FootballMatch;
-import sk.balaz.worldcup.scoreboard.game.Match;
-import sk.balaz.worldcup.scoreboard.game.ScoreBoard;
-import sk.balaz.worldcup.scoreboard.game.Team;
+import sk.balaz.worldcup.scoreboard.game.*;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class WorldCupScoreBoardTest {
+public class WorldCupWorldCupScoreBoardTest {
 
     private ScoreBoard underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new ScoreBoard();
+        underTest = new WorldCupScoreBoard();
     }
 
     @Test
