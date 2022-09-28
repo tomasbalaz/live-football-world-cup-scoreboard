@@ -48,6 +48,9 @@ WorldCupWorldCupScoreBoardTest contains Junit test :
 	void itShouldNotInsertMatchWhenSameMatchExists()
 ```
 ```java
+	void itShouldNotInsertMatchWhenActiveMatchExist()
+```
+```java
 	void itShouldRemoveMatch()
 ```
 ```java
