@@ -125,6 +125,22 @@ public class WorldCupWorldCupScoreBoardTest {
     }
 
     @Test
+    void itShouldNotUpdateTeamWithNegativeTeamScoreValue() {
+
+        //given
+        Team homeTeam = new Team("Mexico");
+        Team awayTeam =  new Team("Canada");
+
+        //when
+        underTest.insertMatch(homeTeam, awayTeam);
+
+        homeTeam.setScore(-1);
+        awayTeam.setScore(-1);
+
+        underTest.updateMatch(homeTeam, awayTeam);
+    }
+
+    @Test
     void itShouldReturnOrderedMatches() {
 
         //given
