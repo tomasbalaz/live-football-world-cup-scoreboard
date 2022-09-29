@@ -55,6 +55,7 @@ public class WorldCupScoreBoard implements ScoreBoard {
     @Override
     public void updateMatch(Team homeTeam, Team awayTeam) {
         FootballMatch footballMatch = new FootballMatch(homeTeam, awayTeam);
+        checkTeamScoreValue(homeTeam.getScore(), awayTeam.getScore());
         Optional<Match> optionalFoundMatch = footballMatches.stream()
                 .filter(m -> m.getHomeTeam().getName().equals(footballMatch.getHomeTeam().getName()))
                 .filter(m -> m.getAwayTeam().getName().equals(footballMatch.getAwayTeam().getName()))
@@ -81,5 +82,12 @@ public class WorldCupScoreBoard implements ScoreBoard {
         );
 
         return footballMatches;
+    }
+
+    private void checkTeamScoreValue(int homeTeamScore, int awayTeamScore) {
+            if(homeTeamScore < 0 || awayTeamScore < 0 ) {
+                throw new ScoreBoardException(
+                        "It is not possible to update match with negative values.");
+            }
     }
 }

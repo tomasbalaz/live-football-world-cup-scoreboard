@@ -137,7 +137,8 @@ public class WorldCupWorldCupScoreBoardTest {
         homeTeam.setScore(-1);
         awayTeam.setScore(-1);
 
-        underTest.updateMatch(homeTeam, awayTeam);
+        //then
+        assertThrows(ScoreBoardException.class, () -> underTest.updateMatch(homeTeam, awayTeam));
     }
 
     @Test
