@@ -60,6 +60,9 @@ WorldCupWorldCupScoreBoardTest contains Junit test :
 	void itShouldNotUpdateMatchWhenMatchIsDisabled()
 ```
 ```java
+	void itShouldNotUpdateTeamWithNegativeTeamScoreValue()
+```
+```java
 	void itShouldReturnOrderedMatches()
 ```
 
