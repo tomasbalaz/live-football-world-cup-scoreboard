@@ -34,13 +34,13 @@ The scoreboard supports the following operations:
 ## Guidelines
 1. Clone this repository
 
-2. Go to src/test/java directory and run WorldCupWorldCupScoreBoardTest.java
+2. Go to src/test/java directory and run WorldCupScoreBoardTest.java
 
 ## Junit tests
 
-All Junit tests are in Java test class WorldCupWorldCupScoreBoardTest.java 
+All Junit tests are in Java test class WorldCupScoreBoardTest.java 
 
-WorldCupWorldCupScoreBoardTest contains Junit test :
+WorldCupScoreBoardTest contains Junit test :
 ```java
 	void itShouldInsertMatch()
 ```
